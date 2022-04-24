@@ -1,6 +1,7 @@
 /*=========================================================================
 
-  Copyright (c) Remi Cresson (IRSTEA). All rights reserved.
+     Copyright (c) 2018-2019 IRSTEA
+     Copyright (c) 2020-2021 INRAE
 
 
      This software is distributed WITHOUT ANY WARRANTY; without even
@@ -10,14 +11,17 @@
 =========================================================================*/
 #include "otbTensorflowDataTypeBridge.h"
 
-namespace otb {
-namespace tf {
+namespace otb
+{
+namespace tf
+{
 
 //
 // returns the datatype used by tensorflow
 //
-template<class Type>
-tensorflow::DataType GetTensorflowDataType()
+template <class Type>
+tensorflow::DataType
+GetTensorflowDataType()
 {
   if (typeid(Type) == typeid(bool))
   {
@@ -73,10 +77,20 @@ tensorflow::DataType GetTensorflowDataType()
 //
 // Return true if the tensor data type is correct
 //
-template<class Type>
-bool HasSameDataType(const tensorflow::Tensor & tensor)
+template <class Type>
+bool
+HasSameDataType(const tensorflow::Tensor & tensor)
 {
   return GetTensorflowDataType<Type>() == tensor.dtype();
+}
+
+//
+// Return the datatype as string
+//
+tensorflow::string
+GetDataTypeAsString(tensorflow::DataType dt)
+{
+  return tensorflow::DataTypeString(dt);
 }
 
 } // end namespace tf
